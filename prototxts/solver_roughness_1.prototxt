@@ -1,0 +1,21 @@
+net: "/home/viveksuryamurthy/Vivek/code/caffe/caffe-segnet-cudnn5-v2/caffe-segnet-cudnn5/models/Segnet/Roughness/net_multitask_v1.prototxt"
+#test_iter: 15
+#test_interval: 400
+base_lr: 0.0000001
+display: 550
+max_iter: 11000
+lr_policy: "step"
+gamma: 0.1
+momentum: 0.9
+#momentum2: 0.999
+weight_decay: 0.00005
+stepsize: 10000
+#debug_info: true
+snapshot: 1100
+snapshot_prefix: "/home/viveksuryamurthy/Vivek/code/caffe/caffe-segnet-cudnn5-v2/caffe-segnet-cudnn5/models/Segnet/Roughness/Berhu"
+solver_mode: GPU
+#solver_type: RMSProp
+#rms_decay: 0.98
+#delta: 1e-6
+
+
