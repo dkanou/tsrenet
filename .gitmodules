@@ -1,0 +1,3 @@
+[submodule "caffe-segnet-cudnn5"]
+	path = caffe-segnet-cudnn5
+	url = https://github.com/TimoSaemann/caffe-segnet-cudnn5
