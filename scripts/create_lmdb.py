@@ -1,7 +1,7 @@
 import os, sys
 import numpy as np
 
-#create a lmdb file for images and labels extracted from pcd using python wrapper pypcd (install pypcd before running the code). The pcd files have roughness and curvature values.
+#create a lmdb file for images and labels extracted from pcd using python wrapper pypcd (install pypcd before running the code). The pcd files have roughness and curvature values. Manual shuffling is done as well.
 
 caffe_root = '/home/viveksuryamurthy/Vivek/code/caffe/caffe-segnet-cudnn5-v2/caffe-segnet-cudnn5/'
 sys.path.insert(0, caffe_root + 'python') 
