@@ -1,0 +1,18 @@
+net: "/home/viveksuryamurthy/Vivek/code/caffe/caffe-segnet-cudnn5-v2/caffe-segnet-cudnn5/models/Segnet/Six-classes-wood-metal/net_seg.prototxt"
+test_iter: 100
+test_interval: 880
+base_lr: 0.001
+display: 880
+max_iter: 8800
+lr_policy: "step"
+gamma: 0.1
+momentum: 0.9
+weight_decay: 0.0005
+stepsize: 8800
+#debug_info: true
+iter_size: 2
+snapshot: 880
+snapshot_prefix: "/home/viveksuryamurthy/Vivek/code/caffe/caffe-segnet-cudnn5-v2/caffe-segnet-cudnn5/models/Segnet/cityscapes_0.001"
+solver_mode: GPU
+
+
