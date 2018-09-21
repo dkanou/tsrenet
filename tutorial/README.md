@@ -1,35 +1,35 @@
-# INSTALLATION
+## INSTALLATION
 
-1. First, clone the caffe repository from caffe-segnet-cudnn:
+- First, clone the caffe repository from caffe-segnet-cudnn:
 
   $ git clone https://github.com/TimoSaemann/caffe-segnet-cudnn5.git
 
-2. Caffe installation instructions can be found in the following links:
-   https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide#the-gpu-support-prerequisites
+- Caffe installation instructions can be found in the following links:
+   - https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-or-15.10-Installation-Guide#the-gpu-support-prerequisites
 
-https://github.com/BVLC/caffe/wiki/Caffe-installing-script-for-ubuntu-16.04---support-Cuda-8
+- https://github.com/BVLC/caffe/wiki/Caffe-installing-script-for-ubuntu-16.04---support-Cuda-8
 
-In Makefile.config, uncomment
- WITH_PYTHON_LAYER := 1
+- In Makefile.config, uncomment **WITH_PYTHON_LAYER := 1**
 
-3. Note: In case there are multiple accounts in the university system, caffe might link to a different version of library (maybe installed earlier). In that case, it is important to change the following lines in the Makefile.config:
+- Note: In case there are multiple accounts in the university system, caffe might link to a different version of library (maybe installed earlier). In that case, it is important to change the following lines in the Makefile.config:
 
- from LIBRARY\_DIRS := \$(PYTHON\_LIB) /usr/local/lib /usr/lib \\
-to LIBRARY\_DIRS := \$(PYTHON\_LIB) \textbf{./build/lib} /usr/local/lib /usr/lib
+ from **LIBRARY\_DIRS := \$(PYTHON\_LIB) /usr/local/lib /usr/lib** \\
+to **LIBRARY\_DIRS := \$(PYTHON\_LIB) \textbf{./build/lib} /usr/local/lib /usr/lib**
 
-4. Uncomment  USE_PKG_CONFIG := 1 in case of issues with linking opencv libraries.
+- Uncomment  **USE_PKG_CONFIG := 1** in case of issues with linking opencv libraries.
 
-# PREPARATION:
+## PREPARATION:
 
-## SEGMENTATION
+### SEGMENTATION
 
-1. Download the dataset. Create the .txt file using createtxt.py. Note: the absolute file path needs to be passed.
-2. Download the net_seg.prototxt and solver_seg.prototxt which defines the model and the hyperparameters respectively for segmentation. Make sure all the filepaths are correct.
-3. Median_frequency is used to calculate the weights for classes. At the bottom of net_seg.prototxt, you can add the weights under loss param.
-4. Net_bn_statistics.prototxt is used for computing the test set accuracy and predicted label (created for convenience). Net_inference.prototxt is used for inference.
-5. Dense_image_data_layer.cpp and caffe.proto have been modified to add data augmentation of contrast & brightness change. Also, mirror function does both horizontal and vertical flip rather than just horizontal flip.
+1. Download the [dataset](https://sites.google.com/site/tsrenet). 
+2. Create the .txt file using createtxt.py. The .txt file contains the path to the input image and annotated image. Note: Make sure the absolute file path to the images and labels are passed.
+3. The **net_seg.prototxt** describes the architecture and **solver_seg.prototxt** describes the hyperparameter values for the model. In case of training, both the files will be required. Make sure all the filepaths are correct.
+4. Median_frequency is used to calculate the weights for classes. At the bottom of net_seg.prototxt, you can add the weights under loss param.
+5. Net_bn_statistics.prototxt is used for computing the test set accuracy and predicted label (created for convenience). Net_inference.prototxt is used for inference.
+6. Dense_image_data_layer.cpp and caffe.proto have been modified to add data augmentation of contrast & brightness change. Also, mirror function does both horizontal and vertical flip rather than just horizontal flip.
 
-## ROUGHNESS
+### ROUGHNESS
 1. Download the dataset. Create the lmdb files using create_lmdb.py (with absolute path).
 2. Download the net_multitask_v1.prototxt and solver_roughness_1.prototxt which defines the model and the hyperparameters respectively for roughness estimation.
 3. Make sure the segmentation network is frozen. 
@@ -37,10 +37,10 @@ to LIBRARY\_DIRS := \$(PYTHON\_LIB) \textbf{./build/lib} /usr/local/lib /usr/lib
 5. Make sure to add the berhu loss layer in the caffe files.
 
 
-# TRAINING & TESTING
+## TRAINING & TESTING
 1. The command for fine-tuning(from caffe directory):
 
-./build/tools/caffe train -gpu 1 -weights ./path_to_weights -solver ./path_to_solver/solver_1.prototxt
+'./build/tools/caffe train -gpu 1 -weights ./path_to_weights -solver ./path_to_solver/solver_seg.prototxt'
 
 2. Once the training is done, run the compute_bn_statistics.py which computes the batch normalization parameter (scale and shift) from the training set.
 3. Merge_bn_layers.py integrates the bn layers into the model, thereby saving improving inference time while execution.
